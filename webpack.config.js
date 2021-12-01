@@ -1,4 +1,6 @@
 const path = require('path')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports={
     entry:'./src/game.ts',
@@ -21,8 +23,15 @@ module.exports={
         port: 8080,
         host:'localhost'
     },
- resolve: {
-    extensions: ['.ts', '.js']
-  }
-
+    resolve: {
+        extensions: ['.ts', '.js']
+    },
+    plugins:[
+        new HTMLWebpackPlugin({
+            template:"./index.html"
+        }),
+        new CopyPlugin({
+             patterns: [{ from: "assets", to: "assets" }],
+        }),
+    ]
 }

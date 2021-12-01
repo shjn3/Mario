@@ -3,7 +3,6 @@ import { Box } from "../objects/box";
 import { Brick } from "../objects/brick";
 import { Bullet } from "../objects/Bullet";
 import { Collectible } from "../objects/collectible";
-import { Enemy } from "../objects/enemy";
 import { Goomba } from "../objects/goomba";
 import { Mario } from "../objects/mario";
 import { Platform } from "../objects/platform";

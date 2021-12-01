@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "https://shjn3.github.io/Mario/",
   "scripts": {
     "dev": "webpack --mode development && webpack serve --mode development ",
+    "build": "webpack --mode development",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "copy-webpack-plugin": "^10.0.0",
+    "gh-pages": "^3.2.3",
+    "html-webpack-plugin": "^5.5.0",
     "node-gyp": "^8.4.1",
     "phaser": "^3.55.2",
     "ts-loader": "^9.2.6",
