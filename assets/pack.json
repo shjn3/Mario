@@ -1,10 +1,15 @@
 {
   "preload": {
     "files": [
-            {
+       {
         "type": "image",
         "key": "arrowDirection",
         "url": "./assets/images/arrowUp.png"
+      },
+      {
+        "type": "image",
+        "key": "bullet",
+        "url": "./assets/images/bullet-red.png"
       },
       {
         "type": "bitmapFont",

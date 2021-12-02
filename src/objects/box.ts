@@ -1,5 +1,5 @@
-import { Collectible } from './collectible';
-import { IBoxConstructor } from '../interfaces/box.interface';
+import { Collectible } from "./Collectible";
+import { IBoxConstructor } from "../interfaces/box.interface";
 
 export class Box extends Phaser.GameObjects.Sprite {
   body: Phaser.Physics.Arcade.Body;
@@ -52,12 +52,12 @@ export class Box extends Phaser.GameObjects.Sprite {
       targets: this,
       props: { y: this.y - 10 },
       duration: 60,
-      ease: 'Power0',
+      ease: "Power0",
       yoyo: true,
       onComplete: function () {
         this.targets[0].active = false;
         this.targets[0].setFrame(1);
-      }
+      },
     });
   }
 
@@ -67,7 +67,7 @@ export class Box extends Phaser.GameObjects.Sprite {
       x: this.x,
       y: this.y - 8,
       texture: this.boxContent,
-      points: 1000
+      points: 1000,
     });
     return this.content;
   }
@@ -75,15 +75,15 @@ export class Box extends Phaser.GameObjects.Sprite {
   public tweenBoxContent(
     props: {},
     duration: number,
-    complete: () => void
+    complete: () => void,
   ): void {
     this.hitBoxTimeline.add({
       targets: this.content,
       props: props,
       delay: 0,
       duration: duration,
-      ease: 'Power0',
-      onComplete: complete
+      ease: "Power0",
+      onComplete: complete,
     });
   }
 
@@ -99,8 +99,8 @@ export class Box extends Phaser.GameObjects.Sprite {
 
   public addCoinAndScore(coin: number, score: number): void {
     this.currentScene.registry.values.coins += coin;
-    this.currentScene.events.emit('coinsChanged');
+    this.currentScene.events.emit("coinsChanged");
     this.currentScene.registry.values.score += score;
-    this.currentScene.events.emit('scoreChanged');
+    this.currentScene.events.emit("scoreChanged");
   }
 }

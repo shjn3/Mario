@@ -15,20 +15,17 @@ module.exports={
             include: path.resolve(__dirname,'src')
         }]
     },
-    devServer:{
-        static:{
-            directory:path.resolve(__dirname,'./'),
-        },
-        open:true,
-        port: 8080,
-        host:'localhost'
-    },
+    // devServer:{
+    //     open:true,
+    //     port: 8080,
+    //     host:'localhost'
+    // },
     resolve: {
         extensions: ['.ts', '.js']
     },
     plugins:[
         new HTMLWebpackPlugin({
-            template:"./index.html"
+            template:"./src/index.html"
         }),
         new CopyPlugin({
              patterns: [{ from: "assets", to: "assets" }],

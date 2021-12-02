@@ -1,4 +1,3 @@
-import { Physics } from "phaser";
 import { ISpriteConstructor } from "../interfaces/sprite.interface";
 import { Bullet } from "./Bullet";
 
@@ -244,14 +243,14 @@ export class Mario extends Phaser.GameObjects.Sprite {
             left: this.flipX,
             x: this.x - 5,
             y: this.y + 5,
-            texture: "coin2",
+            texture: "bullet",
           })
         : new Bullet({
             scene: this.scene,
             left: this.flipX,
             x: this.x + 5,
             y: this.y + 5,
-            texture: "coin2",
+            texture: "bullet",
           }),
     );
   }

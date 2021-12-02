@@ -1,5 +1,5 @@
-import { IPortalConstructor } from '../interfaces/portal.interface';
-import { IPortalDestination } from '../interfaces/portal-destination.interface';
+import { IPortalConstructor } from "../interfaces/portal.interface";
+import { IPortalDestination } from "../interfaces/portal-destination.interface";
 
 export class Portal extends Phaser.GameObjects.Zone {
   body: Phaser.Physics.Arcade.Body;

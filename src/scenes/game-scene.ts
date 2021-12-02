@@ -1,12 +1,12 @@
 import { ArrowDirection } from "../objects/ArrowDirection";
-import { Box } from "../objects/box";
-import { Brick } from "../objects/brick";
+import { Box } from "../objects/Box";
+import { Brick } from "../objects/Brick";
 import { Bullet } from "../objects/Bullet";
-import { Collectible } from "../objects/collectible";
-import { Goomba } from "../objects/goomba";
-import { Mario } from "../objects/mario";
-import { Platform } from "../objects/platform";
-import { Portal } from "../objects/portal";
+import { Collectible } from "../objects/Collectible";
+import { Goomba } from "../objects/Goomba";
+import { Mario } from "../objects/Mario";
+import { Platform } from "../objects/Platform";
+import { Portal } from "../objects/Portal";
 
 export class GameScene extends Phaser.Scene {
   // tilemap
@@ -147,7 +147,7 @@ export class GameScene extends Phaser.Scene {
     this.physics.add.collider(
       this.player.getBullets(),
       this.foregroundLayer,
-      this.handleBulletForeGroundPlayer,
+      this.handleBulletHitForeGroundLayer,
       null,
       this,
     );
@@ -155,7 +155,21 @@ export class GameScene extends Phaser.Scene {
     this.physics.add.overlap(
       this.player.getBullets(),
       this.enemies,
-      this.handleBulletEnemyOverlay,
+      this.handleBulletHitEnemy,
+      null,
+      this,
+    );
+    this.physics.add.collider(
+      this.player.getBullets(),
+      this.boxes,
+      this.handleBulletHitBox,
+      null,
+      this,
+    );
+    this.physics.add.collider(
+      this.player.getBullets(),
+      this.bricks,
+      this.handleBulletHitBrick,
       null,
       this,
     );
@@ -332,34 +346,44 @@ export class GameScene extends Phaser.Scene {
     });
   }
   /**
+   * bullet <-> brick collision
+   * @param _bullet
+   */
+  private handleBulletHitBrick(_bullet: Bullet): void {
+    _bullet.destroy();
+  }
+  /**
+   * bullet <-> box collision
+   * @param _bullet
+   * @param _enemy
+   */
+  private handleBulletHitBox(_bullet: Bullet): void {
+    _bullet.destroy();
+  }
+  /**
    * Player.Bullets <-> Enemy Overlap
    * @param _player.Bullets
    * @param _enemy
    */
-  private handleBulletEnemyOverlay(_bullet: Bullet, _enemy: Goomba): void {
-    if (
-      (_bullet.body.touching.left && _enemy.body.touching.right) ||
-      (_bullet.body.touching.right && _enemy.body.touching.left)
-    ) {
-      _bullet.destroy();
-      _enemy.gotHitOnHead();
-      this.add.tween({
-        targets: _enemy,
-        props: { alpha: 0 },
-        duration: 1000,
-        ease: "Power0",
-        yoyo: false,
-        onComplete: function () {
-          _enemy.isDead();
-        },
-      });
-    }
+  private handleBulletHitEnemy(_bullet: Bullet, _enemy: Goomba): void {
+    _bullet.destroy();
+    _enemy.gotHitOnHead();
+    this.add.tween({
+      targets: _enemy,
+      props: { alpha: 0 },
+      duration: 1000,
+      ease: "Power0",
+      yoyo: false,
+      onComplete: function () {
+        _enemy.isDead();
+      },
+    });
   }
   /**
    * Player.Bullets <-> foreGroundLayer conlission
    * @param _player.Bullets
    */
-  private handleBulletForeGroundPlayer(_bullet: Bullet) {
+  private handleBulletHitForeGroundLayer(_bullet: Bullet) {
     _bullet.destroy();
   }
   /**
@@ -459,7 +483,7 @@ export class GameScene extends Phaser.Scene {
       // restart the game scene
       this.scene.restart();
     } else if (_portal.name === "exit") {
-      this.reset();
+      this.completeLevel();
     }
   }
 
@@ -487,15 +511,15 @@ export class GameScene extends Phaser.Scene {
 
   // TODO!!!
   private handlePlayerOnPlatform(player: Mario, platform: Platform): void {
-    if (
-      platform.body.moves &&
-      platform.body.touching.up &&
-      player.body.touching.down
-    ) {
-    }
+    // if (
+    //   platform.body.moves &&
+    //   platform.body.touching.up &&
+    //   player.body.touching.down
+    // ) {
+    // }
   }
-  //reset update level
-  private reset(): void {
+  //reset properties game world when Mario move to exit and update Level Map
+  private completeLevel(): void {
     if (this.registry.get("level") === "level3") {
       this.scene.stop("GameScene");
       this.scene.stop("HUDScene");
