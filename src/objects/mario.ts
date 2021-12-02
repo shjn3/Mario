@@ -127,6 +127,7 @@ export class Mario extends Phaser.GameObjects.Sprite {
       this.body.setVelocityY(-180);
       this.isJumping = true;
     }
+    //handle shoot
     if (this.keys.get("SHOOT").isDown && !this.isShooting) {
       this.isShooting = true;
       this.shoot();
