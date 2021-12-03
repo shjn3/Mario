@@ -15,6 +15,10 @@ export class Mario extends Phaser.GameObjects.Sprite {
   private bullets: Phaser.GameObjects.Group;
   private isShooting: boolean;
 
+  private soundDie: Phaser.Sound.BaseSound;
+  private soundJumpSmall: Phaser.Sound.BaseSound;
+  private soundJumpLarge: Phaser.Sound.BaseSound;
+
   // input
   private keys: Map<string, Phaser.Input.Keyboard.Key>;
 
@@ -32,6 +36,9 @@ export class Mario extends Phaser.GameObjects.Sprite {
     this.currentScene = aParams.scene;
     this.initSprite();
     this.currentScene.add.existing(this);
+    this.soundDie = this.currentScene.sound.add("soundDie");
+    this.soundJumpSmall = this.currentScene.sound.add("soundJumpSmall");
+    this.soundJumpLarge = this.currentScene.sound.add("soundJumpLarge");
   }
 
   private initSprite() {
@@ -96,6 +103,7 @@ export class Mario extends Phaser.GameObjects.Sprite {
   private handleInput() {
     if (this.y > this.currentScene.sys.canvas.height) {
       // mario fell into a hole
+      this.soundDie.play();
       this.isDying = true;
     }
 
@@ -124,6 +132,9 @@ export class Mario extends Phaser.GameObjects.Sprite {
 
     // handle jumping
     if (this.keys.get("JUMP").isDown && !this.isJumping) {
+      this.marioSize === "big"
+        ? this.soundJumpLarge.play()
+        : this.soundJumpSmall.play();
       this.body.setVelocityY(-180);
       this.isJumping = true;
     }
@@ -215,6 +226,7 @@ export class Mario extends Phaser.GameObjects.Sprite {
 
   public gotHit(): void {
     this.isVulnerable = false;
+    this.soundDie.play();
     if (this.marioSize === "big") {
       this.shrinkMario();
     } else {

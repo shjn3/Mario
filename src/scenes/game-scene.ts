@@ -15,6 +15,9 @@ export class GameScene extends Phaser.Scene {
   private backgroundLayer: Phaser.Tilemaps.TilemapLayer;
   private foregroundLayer: Phaser.Tilemaps.TilemapLayer;
 
+  //variables
+  private soundCollect: Phaser.Sound.BaseSound;
+
   // game objects
   private boxes: Phaser.GameObjects.Group;
   private bricks: Phaser.GameObjects.Group;
@@ -184,6 +187,8 @@ export class GameScene extends Phaser.Scene {
       this.map.widthInPixels,
       this.map.heightInPixels,
     );
+
+    this.soundCollect = this.sound.add("soundCollect");
   }
 
   update(): void {
@@ -431,7 +436,6 @@ export class GameScene extends Phaser.Scene {
           _box.tweenBoxContent({ y: _box.y - 40, alpha: 0 }, 700, function () {
             _box.getContent().destroy();
           });
-
           _box.addCoinAndScore(1, 100);
           break;
         }
@@ -506,6 +510,7 @@ export class GameScene extends Phaser.Scene {
         break;
       }
     }
+    this.soundCollect.play();
     _collectible.collected();
   }
 

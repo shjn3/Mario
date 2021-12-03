@@ -1,6 +1,7 @@
 export class MenuScene extends Phaser.Scene {
   private startKey: Phaser.Input.Keyboard.Key;
   private bitmapTexts: Phaser.GameObjects.BitmapText[] = [];
+  private soundWarning: Phaser.Sound.BaseSound;
 
   constructor() {
     super({
@@ -14,6 +15,7 @@ export class MenuScene extends Phaser.Scene {
     );
     this.startKey.isDown = false;
     this.initGlobalDataManager();
+    // this.soundWarning = this.sound.add("soundWarning", { loop: true });
   }
 
   create(): void {
@@ -28,6 +30,7 @@ export class MenuScene extends Phaser.Scene {
         8,
       ),
     );
+    this.sound.add("soundWarning", { loop: true }).play();
   }
 
   update(): void {
