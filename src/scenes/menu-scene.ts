@@ -39,13 +39,13 @@ export class MenuScene extends Phaser.Scene {
 
   private initGlobalDataManager(): void {
     this.registry.set("time", 400);
-    this.registry.set("level", "level1");
+    this.registry.set("level", "level3");
     this.registry.set("world", "1-3");
     this.registry.set("worldTime", "WORLD TIME");
     this.registry.set("score", 0);
     this.registry.set("coins", 0);
     this.registry.set("lives", 2);
-    this.registry.set("spawn", { x: 15, y: 44, dir: "down" });
+    this.registry.set("spawn", { x: 1500, y: 44, dir: "down" });
     this.registry.set("marioSize", "small");
   }
 }
