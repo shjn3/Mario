@@ -528,7 +528,8 @@ export class GameScene extends Phaser.Scene {
     if (this.registry.get("level") === "level3") {
       this.scene.stop("GameScene");
       this.scene.stop("HUDScene");
-      this.scene.start("MenuScene");
+      // this.scene.start("MenuScene");
+      this.scene.start("OverScene");
     } else {
       this.registry.set("spawn", {
         x: 15,

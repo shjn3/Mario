@@ -85,7 +85,8 @@ export class Mario extends Phaser.GameObjects.Sprite {
       if (this.y > this.currentScene.sys.canvas.height) {
         this.currentScene.scene.stop("GameScene");
         this.currentScene.scene.stop("HUDScene");
-        this.currentScene.scene.start("MenuScene");
+        // this.currentScene.scene.start("MenuScene");
+        this.currentScene.scene.start("OverScene");
       }
     }
 
