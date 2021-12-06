@@ -7,6 +7,8 @@ import { Goomba } from "../objects/Goomba";
 import { Mario } from "../objects/Mario";
 import { Platform } from "../objects/Platform";
 import { Portal } from "../objects/Portal";
+import { Carnivorous } from "../objects/Carnivorous";
+import { Enemy } from "../objects/enemy";
 
 export class GameScene extends Phaser.Scene {
   // tilemap
@@ -270,6 +272,16 @@ export class GameScene extends Phaser.Scene {
           }),
         );
       }
+      if (object.type === "carni") {
+        this.enemies.add(
+          new Carnivorous({
+            scene: this,
+            x: object.x,
+            y: object.y,
+            texture: "coin2",
+          }),
+        );
+      }
 
       if (object.type === "brick") {
         this.bricks.add(
@@ -396,25 +408,35 @@ export class GameScene extends Phaser.Scene {
    * @param _player [Mario]
    * @param _enemy  [Enemy]
    */
-  private handlePlayerEnemyOverlap(_player: Mario, _enemy: Goomba): void {
-    if (_player.body.touching.down && _enemy.body.touching.up) {
-      // player hit enemy on top
-      _player.bounceUpAfterHitEnemyOnHead();
-      _enemy.gotHitOnHead();
-      this.add.tween({
-        targets: _enemy,
-        props: { alpha: 0 },
-        duration: 1000,
-        ease: "Power0",
-        yoyo: false,
-        onComplete: function () {
-          _enemy.isDead();
-        },
-      });
-    } else {
-      // player got hit from the side or on the head
-      if (_player.getVulnerable()) {
+  private handlePlayerEnemyOverlap(_player: Mario, _enemy: Enemy): void {
+    if (_enemy instanceof Goomba) {
+      if (_player.body.touching.down && _enemy.body.touching.up) {
+        // player hit enemy on top
+        _player.bounceUpAfterHitEnemyOnHead();
+        _enemy.gotHitOnHead();
+        this.add.tween({
+          targets: _enemy,
+          props: { alpha: 0 },
+          duration: 1000,
+          ease: "Power0",
+          yoyo: false,
+          onComplete: function () {
+            _enemy.isDead();
+          },
+        });
+      } else {
+        // player got hit from the side or on the head
+        if (_player.getVulnerable()) {
+          _player.gotHit();
+        }
+      }
+    }
+    if (_enemy instanceof Carnivorous) {
+      if (!_enemy.active) {
+        _enemy.wakeUp();
+      } else {
         _player.gotHit();
+        _enemy.gotHitOnHead();
       }
     }
   }
@@ -440,7 +462,7 @@ export class GameScene extends Phaser.Scene {
           break;
         }
         case "rotatingCoin": {
-          _box.tweenBoxContent({ y: _box.y - 40, alpha: 0 }, 700, function () {
+          _box.tweenBoxContent({ y: _box.y, alpha: 0 }, 700, function () {
             _box.getContent().destroy();
           });
 
@@ -507,10 +529,10 @@ export class GameScene extends Phaser.Scene {
         break;
       }
       default: {
+        this.soundCollect.play();
         break;
       }
     }
-    this.soundCollect.play();
     _collectible.collected();
   }
 
