@@ -10,12 +10,12 @@ export class HUDScene extends Phaser.Scene {
 
   create(): void {
     this.textElements = new Map([
-      ["LIVES", this.addText(0, 0, `MARIOx ${this.registry.get("lives")}`)],
-      ["WORLDTIME", this.addText(80, 0, `${this.registry.get("worldTime")}`)],
-      ["SCORE", this.addText(40, 8, `${this.registry.get("score")}`)],
-      ["COINS", this.addText(80, 8, `${this.registry.get("coins")}`)],
-      ["WORLD", this.addText(96, 8, `${this.registry.get("world")}`)],
-      ["TIME", this.addText(136, 8, `${this.registry.get("time")}`)],
+      ["LIVES", this.addText(2, 2, `MARIOx ${this.registry.get("lives")}`)],
+      ["WORLDTIME", this.addText(200, 2, `${this.registry.get("worldTime")}`)],
+      ["SCORE", this.addText(40, 20, `${this.registry.get("score")}`)],
+      ["COINS", this.addText(80, 20, `${this.registry.get("coins")}`)],
+      ["WORLD", this.addText(230, 20, `${this.registry.get("world")}`)],
+      ["TIME", this.addText(300, 20, `${this.registry.get("time")}`)],
     ]);
 
     // create events
@@ -39,7 +39,7 @@ export class HUDScene extends Phaser.Scene {
     y: number,
     value: string,
   ): Phaser.GameObjects.BitmapText {
-    return this.add.bitmapText(x, y, "font", value, 8);
+    return this.add.bitmapText(x, y, "font", value, 15);
   }
 
   private updateTime() {

@@ -47,7 +47,7 @@ export class GameScene extends Phaser.Scene {
     // create our tilemap from Tiled JSON
     this.map = this.make.tilemap({ key: this.registry.get("level") });
     // add our tileset and layers to our tilemap
-    this.tileset = this.map.addTilesetImage("tiles");
+    this.tileset = this.map.addTilesetImage("tiles-2");
     this.backgroundLayer = this.map.createLayer(
       "backgroundLayer",
       this.tileset,
@@ -258,7 +258,7 @@ export class GameScene extends Phaser.Scene {
           scene: this,
           x: this.registry.get("spawn").x,
           y: this.registry.get("spawn").y,
-          texture: "mario",
+          texture: "mario1",
         });
       }
 
@@ -462,7 +462,7 @@ export class GameScene extends Phaser.Scene {
           break;
         }
         case "rotatingCoin": {
-          _box.tweenBoxContent({ y: _box.y, alpha: 0 }, 700, function () {
+          _box.tweenBoxContent({ y: _box.y - 40, alpha: 0 }, 700, function () {
             _box.getContent().destroy();
           });
 

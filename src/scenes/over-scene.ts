@@ -11,32 +11,23 @@ export class OverScene extends Phaser.Scene {
     this.playAgainKey.isDown = false;
   }
   create() {
-    // this.cameras.main.setBackgroundColor("#000000");
+    this.cameras.main.setBackgroundColor("#f8f8f8");
     this.bitmapTexts.push(
       this.add.bitmapText(
-        this.sys.canvas.width / 2 - 50,
-        30,
+        this.sys.canvas.width / 2 - 100,
+        100,
         "font",
         "Game Over",
-        8,
+        20,
       ),
     );
-    // this.bitmapTexts.push(
-    //   this.add.bitmapText(
-    //     this.sys.canvas.width / 2 - 50,
-    //     45,
-    //     "font",
-    //     `Score: ${this.registry.get("score")}`,
-    //     8,
-    //   ),
-    // );
     this.bitmapTexts.push(
       this.add.bitmapText(
-        this.sys.canvas.width / 2 - 50,
-        45,
+        this.sys.canvas.width / 2 - 100,
+        140,
         "font",
         `Press P to\n\nplay again`,
-        8,
+        20,
       ),
     );
   }

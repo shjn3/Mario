@@ -1,4 +1,4 @@
-import { IBrickConstructor } from '../interfaces/brick.interface';
+import { IBrickConstructor } from "../interfaces/brick.interface";
 
 export class Brick extends Phaser.GameObjects.Sprite {
   body: Phaser.Physics.Arcade.Body;
@@ -24,7 +24,7 @@ export class Brick extends Phaser.GameObjects.Sprite {
 
     // physics
     this.currentScene.physics.world.enable(this);
-    this.body.setSize(8, 8);
+    this.body.setSize(16, 16);
     this.body.setAllowGravity(false);
     this.body.setImmovable(true);
   }
@@ -35,7 +35,7 @@ export class Brick extends Phaser.GameObjects.Sprite {
       for (let i = -2; i < 2; i++) {
         // create smaller bricks
         let brick = this.currentScene.add
-          .sprite(this.x, this.y, 'brick')
+          .sprite(this.x, this.y, "brick")
           .setOrigin(0, 0)
           .setDisplaySize(4, 4);
         this.currentScene.physics.world.enable(brick);
@@ -48,7 +48,7 @@ export class Brick extends Phaser.GameObjects.Sprite {
 
       // add some score for killing the brick
       this.currentScene.registry.values.score += this.destroyingValue;
-      this.currentScene.events.emit('scoreChanged');
+      this.currentScene.events.emit("scoreChanged");
     }
   }
 }

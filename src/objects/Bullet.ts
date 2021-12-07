@@ -16,10 +16,10 @@ export class Bullet extends Phaser.Physics.Arcade.Image {
     this.body = new Phaser.Physics.Arcade.Body(this.scene.physics.world, this);
     this.scene.physics.world.enable(this);
     if (isLeft) {
-      this.body.setVelocityX(-100);
+      this.body.setVelocityX(-200);
       this.setRotation(-Math.PI / 2);
     } else {
-      this.body.setVelocityX(100);
+      this.body.setVelocityX(200);
       this.setRotation(Math.PI / 2);
     }
     this.body.setAllowGravity(false);
