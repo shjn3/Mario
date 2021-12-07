@@ -12,8 +12,8 @@ export class HUDScene extends Phaser.Scene {
     this.textElements = new Map([
       ["LIVES", this.addText(2, 2, `MARIOx ${this.registry.get("lives")}`)],
       ["WORLDTIME", this.addText(200, 2, `${this.registry.get("worldTime")}`)],
-      ["SCORE", this.addText(40, 20, `${this.registry.get("score")}`)],
-      ["COINS", this.addText(80, 20, `${this.registry.get("coins")}`)],
+      ["SCORE", this.addText(80, 20, `${this.registry.get("score")}`)],
+      ["COINS", this.addText(107, 20, `${this.registry.get("coins")}`)],
       ["WORLD", this.addText(230, 20, `${this.registry.get("world")}`)],
       ["TIME", this.addText(300, 20, `${this.registry.get("time")}`)],
     ]);
@@ -51,14 +51,14 @@ export class HUDScene extends Phaser.Scene {
     this.textElements
       .get("COINS")
       .setText(`${this.registry.get("coins")}`)
-      .setX(80 - 8 * (this.registry.get("coins").toString().length - 1));
+      .setX(105 - 8 * (this.registry.get("coins").toString().length - 1));
   }
 
   private updateScore() {
     this.textElements
       .get("SCORE")
       .setText(`${this.registry.get("score")}`)
-      .setX(40 - 8 * (this.registry.get("score").toString().length - 1));
+      .setX(59 - 8 * (this.registry.get("score").toString().length - 1));
   }
 
   private updateLives() {
