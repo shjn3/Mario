@@ -4,9 +4,9 @@
       "key": "smallMarioWalk",
       "frames": {
         "typeOfGeneration": "generateFrameNumbers",
-        "key": "mario",
-        "start": 0,
-        "end": 3
+        "key": "mario1",
+        "start": 3,
+        "end": 5
       },
       "repeat": -1,
       "frameRate": 18
@@ -15,9 +15,9 @@
       "key": "bigMarioWalk",
       "frames": {
         "typeOfGeneration": "generateFrameNumbers",
-        "key": "mario",
-        "start": 6,
-        "end": 9
+        "key": "mario1",
+        "start": 10,
+        "end": 12
       },
       "repeat": -1,
       "frameRate": 18
