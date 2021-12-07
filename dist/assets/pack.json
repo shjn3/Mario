@@ -163,6 +163,11 @@
       },
        {
         "type": "audio",
+        "key": "soundMarioUp",
+        "url": "./assets/sounds/smb/smb_1_up.wav"
+      },
+       {
+        "type": "audio",
         "key": "soundCollect",
         "url": "./assets/sounds/smb/smb_coin.wav"
       },
@@ -185,6 +190,16 @@
         "type": "audio",
         "key": "soundWarning",
         "url": "./assets/sounds/smb/smb_stage_clear.wav"
+      },
+      {
+        "type": "audio",
+        "key": "soundOver",
+        "url": "./assets/sounds/smb/smb_gameover.wav"
+      },
+          {
+        "type": "audio",
+        "key": "soundOver",
+        "url": "./assets/sounds/smb/smb_gameover.wav"
       }
     ]
   }

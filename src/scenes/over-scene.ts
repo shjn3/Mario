@@ -1,6 +1,7 @@
 export class OverScene extends Phaser.Scene {
   private bitmapTexts: Phaser.GameObjects.BitmapText[] = [];
   private playAgainKey: Phaser.Input.Keyboard.Key;
+  private gameOverSound: Phaser.Sound.BaseSound;
   constructor() {
     super("OverScene");
   }
@@ -30,9 +31,14 @@ export class OverScene extends Phaser.Scene {
         20,
       ),
     );
+    this.gameOverSound = this.sound.add("soundOver");
+    this.gameOverSound.play({
+      loop: true,
+    });
   }
   update() {
     if (this.playAgainKey.isDown) {
+      this.gameOverSound.stop();
       this.scene.start("MenuScene");
     }
   }
