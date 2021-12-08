@@ -481,7 +481,6 @@ export class GameScene extends Phaser.Scene {
           break;
         }
         case "star": {
-          console.log();
           _box.popUpCollectible();
           break;
         }
